@@ -3,3 +3,6 @@ GET http://localhost:3001/api/persons
 
 ### Get a particular resource my means of its id.
 GET http://localhost:3001/api/persons/3
+
+###
+DELETE http://localhost:3001/api/persons/1

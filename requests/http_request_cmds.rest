@@ -1,0 +1,5 @@
+### Get all resources
+GET http://localhost:3001/api/persons
+
+### Get a particular resource my means of its id.
+GET http://localhost:3001/api/persons/3

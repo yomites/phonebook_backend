@@ -25,7 +25,7 @@ Content-Type: application/json
     "number": "49-33-6233122"
 }
 
-### Test duplicate name
+### Test duplicate name containing different letter cases
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 

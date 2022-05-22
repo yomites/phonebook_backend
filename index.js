@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
 
 let persons = [
     { 
@@ -52,6 +53,41 @@ app.delete('/api/persons/:id', (request, response) => {
   
     response.status(204).end()
 })
+
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+    console.log(body, body.name, body.number)
+  
+    const person = {
+        id: idGenerator(),
+        name: body.name,
+        number: body.number
+    }
+  
+    persons = persons.concat(person)
+    response.json(person)
+})
+
+const idGenerator = () => {
+
+    const idArray = persons.map(p => p.id)
+    const maxId = persons.length * 5
+    const minId = 1
+    console.log(idArray, maxId, minId)
+  
+    const idFinder = () => {
+        const id = Math.floor(Math.random() * (maxId - minId + 1)) + minId
+        console.log('Generated id',id)
+        const idFilter = idArray.filter(a => a === id)
+        // Recursive algorithm to test the generated id availability
+        if (idFilter.length !== 0) {
+            return idFinder()
+        } else {
+            return id
+        }
+    }
+    return idFinder()
+}
 
 const PORT = 3001
 app.listen(PORT, () => {

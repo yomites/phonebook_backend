@@ -15,3 +15,46 @@ Content-Type: application/json
     "name": "Maria Poppendieck", 
     "number": "49-33-6233122"
 }
+
+### Test duplicate name
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Arto Hellas",
+    "number": "49-33-6233122"
+}
+
+### Test duplicate name
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "arto Hellas",
+    "number": "49-33-6233122"
+}
+
+### Add new entry
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Benedict Bellas",
+    "number": "49-33-6233122"
+}
+
+### test name missing in post operation
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "number": "49-33-6233122"
+}
+
+### Test number missing in post operation
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Arto Hellas"
+}

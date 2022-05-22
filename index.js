@@ -57,15 +57,28 @@ app.delete('/api/persons/:id', (request, response) => {
 app.post('/api/persons', (request, response) => {
     const body = request.body
     console.log(body, body.name, body.number)
+
+    if (!body.name) {
+        return response.status(400).json({ error: 'name missing' })
+    } else if (!body.number) {
+        return response.status(400).json({ error: 'number missing' })
+    }
   
     const person = {
         id: idGenerator(),
         name: body.name,
         number: body.number
     }
+
+    const duplicateName = persons.find(p => 
+        p.name.toLowerCase() === person.name.toLowerCase())
   
-    persons = persons.concat(person)
-    response.json(person)
+    if (duplicateName) {
+        return response.status(400).json({ error: 'name must be unique' })
+    } else {
+        persons = persons.concat(person)
+        response.json(person)
+    }
 })
 
 const idGenerator = () => {

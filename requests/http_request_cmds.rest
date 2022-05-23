@@ -2,10 +2,10 @@
 GET http://localhost:3001/api/persons
 
 ### Get a particular resource my means of its id.
-GET http://localhost:3001/api/persons/6
+GET http://localhost:3001/api/persons/someInvalidId
 
 ### To test deleting a particular phonebook entry
-DELETE http://localhost:3001/api/persons/628be08265897f6ea34e2163
+DELETE http://localhost:3001/api/persons/628be95bead5a90323f6bc3f
 
 ### For testing adding new phonebook entries
 POST http://localhost:3001/api/persons
@@ -66,4 +66,13 @@ Content-Type: application/json
 {
     "name": "Liisa Marttinen",
     "number": "040-243563"
+}
+
+### Modify entry
+PUT http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Liisa Marttinen",
+    "number": "040-267263"
 }

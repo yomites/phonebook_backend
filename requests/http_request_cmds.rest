@@ -4,6 +4,9 @@ GET http://localhost:3001/api/persons
 ### Get a particular resource my means of its id.
 GET http://localhost:3001/api/persons/someInvalidId
 
+### Get a particular resource my means of its id.
+GET http://localhost:3001/api/persons/628be823e8de4cdad6e0720a
+
 ### To test deleting a particular phonebook entry
 DELETE http://localhost:3001/api/persons/628be95bead5a90323f6bc3f
 
@@ -39,7 +42,7 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Benedict Bellas",
+    "name": "Kaiju Altonen",
     "number": "49-33-6233122"
 }
 
@@ -64,15 +67,15 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Liisa Marttinen",
+    "name": "Markus Brown",
     "number": "040-243563"
 }
 
 ### Modify entry
-PUT http://localhost:3001/api/persons/628becf92c049652d92f4da8
+PUT http://localhost:3001/api/persons/628be823e8de4cdad6e0720a
 Content-Type: application/json
 
 {
-    "name": "Baba alani",
+    "name": "Liisa Marttinen",
     "number": "044-3991003"
 }

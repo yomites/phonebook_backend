@@ -34,10 +34,6 @@ let persons = [
     }
 ]
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
-})
-
 app.get('/api/persons', (request, response, next) => {
     Person.find({}).then(persons => {
         response.json(persons)
@@ -45,17 +41,22 @@ app.get('/api/persons', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.get('/info', (request, response) => {
-    response.send(`<div><h3>Phonebook has info for 
+app.get('/info', (request, response, next) => {
+    Person.find({}).then(persons => {
+        response.send(`<div><h3>Phonebook has info for 
         ${persons.length} people</h3></div><div><h3>
         ${new Date()}</h3></div>`)
+    })
 })
 
-app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find(person => person.id === id)
-    person ? response.json(person) : 
-        response.status(404).end()
+app.get('/api/persons/:id', (request, response, next) => {
+    Person.findById(request.params.id).then(person => {
+        if (person) {
+            response.json(person)
+        } else {
+            response.status(404).end()
+        }
+    }).catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
@@ -87,15 +88,6 @@ app.post('/api/persons', (request, response, next) => {
     })
     .catch(error => next(error))
 
-    // const duplicateName = persons.find(p => 
-    //     p.name.toLowerCase() === person.name.toLowerCase())
-  
-    // if (duplicateName) {
-    //     return response.status(400).json({ error: 'name must be unique' })
-    // } else {
-    //     persons = persons.concat(person)
-    //     response.json(person)
-    // }
 })
 
 app.put('/api/persons/:id', (request, response, next) => {

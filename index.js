@@ -68,27 +68,31 @@ app.post('/api/persons', (request, response) => {
     const body = request.body
     console.log(body, body.name, body.number)
 
-    if (!body.name) {
+    if (body.name === undefined) {
         return response.status(400).json({ error: 'name missing' })
-    } else if (!body.number) {
+    } else if (body.number === undefined) {
         return response.status(400).json({ error: 'number missing' })
     }
   
-    const person = {
+    const person = new Person({
         id: idGenerator(),
         name: body.name,
         number: body.number
-    }
+    })
 
-    const duplicateName = persons.find(p => 
-        p.name.toLowerCase() === person.name.toLowerCase())
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
+
+    // const duplicateName = persons.find(p => 
+    //     p.name.toLowerCase() === person.name.toLowerCase())
   
-    if (duplicateName) {
-        return response.status(400).json({ error: 'name must be unique' })
-    } else {
-        persons = persons.concat(person)
-        response.json(person)
-    }
+    // if (duplicateName) {
+    //     return response.status(400).json({ error: 'name must be unique' })
+    // } else {
+    //     persons = persons.concat(person)
+    //     response.json(person)
+    // }
 })
 
 const idGenerator = () => {

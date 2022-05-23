@@ -2,10 +2,10 @@
 GET http://localhost:3001/api/persons
 
 ### Get a particular resource my means of its id.
-GET http://localhost:3001/api/persons/3
+GET http://localhost:3001/api/persons/6
 
 ### To test deleting a particular phonebook entry
-DELETE http://localhost:3001/api/persons/1
+DELETE http://localhost:3001/api/persons/628be08265897f6ea34e2163
 
 ### For testing adding new phonebook entries
 POST http://localhost:3001/api/persons

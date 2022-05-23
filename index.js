@@ -6,8 +6,8 @@ const cors = require('cors')
 const Person = require('./models/person')
 
 morgan.token('type', function (req, res) { return JSON.stringify(req.body)})
-app.use(express.json())
 app.use(express.static('build'))
+app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :type'))
 app.use(cors())
 
@@ -42,6 +42,10 @@ app.get('/api/persons', (request, response) => {
     Person.find({}).then(persons => {
         response.json(persons)
     })
+    .catch(error => {
+        console.log('error occured', error)
+        response.status(response.statusCode).end()
+    })
 })
 
 app.get('/info', (request, response) => {
@@ -58,10 +62,14 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    persons = persons.filter(person => person.id !== id)
-  
-    response.status(204).end()
+    Person.findByIdAndRemove(request.params.id).then(result => {  
+        console.log(result)   
+        response.status(204).end()       
+    })
+    .catch(error => {
+        console.log('error occured', error)
+        response.status(response.statusCode).end()
+    })
 })
 
 app.post('/api/persons', (request, response) => {
@@ -82,6 +90,10 @@ app.post('/api/persons', (request, response) => {
 
     person.save().then(savedPerson => {
         response.json(savedPerson)
+    })
+    .catch(error => {
+        console.log('error occured', error)
+        response.status(response.statusCode).end()
     })
 
     // const duplicateName = persons.find(p => 

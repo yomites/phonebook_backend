@@ -69,10 +69,10 @@ Content-Type: application/json
 }
 
 ### Modify entry
-PUT http://localhost:3001/api/persons
+PUT http://localhost:3001/api/persons/628becf92c049652d92f4da8
 Content-Type: application/json
 
 {
-    "name": "Liisa Marttinen",
-    "number": "040-267263"
+    "name": "Baba alani",
+    "number": "044-3991003"
 }

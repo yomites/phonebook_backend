@@ -98,6 +98,24 @@ app.post('/api/persons', (request, response, next) => {
     // }
 })
 
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+
+    const person = {
+        number: body.number,
+    }
+
+    Person.findByIdAndUpdate(request.params.id, person, {new: true})
+        .then(updatedPerson => {
+            if (updatedPerson) {
+                response.json(updatedPerson)
+            } else {
+                response.status(404).end()
+            }
+            
+        }).catch(error => next(error))
+})
+
 const idGenerator = () => {
 
     const idArray = persons.map(p => p.id)

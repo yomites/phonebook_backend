@@ -51,8 +51,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Li",
-    "number": "49-33-6233122"
+    "name": "Liisa Marttinen",
+    "number": "49-6233122"
 }
 
 ### Test number missing in post operation
@@ -61,6 +61,14 @@ Content-Type: application/json
 
 {
     "name": "Arto Hellas"
+}
+
+### Test name missing in post operation
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "number": "233-453456"
 }
 
 ### Add new entry
@@ -73,10 +81,10 @@ Content-Type: application/json
 }
 
 ### Modify entry
-PUT http://localhost:3001/api/persons/628be823e8de4cdad6e0720a
+PUT http://localhost:3001/api/persons/628e92e85ac578900216b5f2
 Content-Type: application/json
 
 {
     "name": "Liisa Marttinen",
-    "number": "044-3991003"
+    "number": "044-3881003"
 }
